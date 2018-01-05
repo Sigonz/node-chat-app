@@ -17,14 +17,11 @@ io.on('connection',(socket)=>{
 
         console.log('User disconnected ');
     });
-       io.emit('createMessage',(msg)=>{
-        socket.emit('gotYourMessage',{
-            f:'Yousof',
+       io.emit('createMessage',{
+                   f:'Yousof',
             text:'Hello and how are you?',
             date : 123345
         });
-        console.log(msg);
-    });
 });
 
 

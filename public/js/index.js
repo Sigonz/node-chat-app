@@ -26,6 +26,6 @@ socket.on('disconnect',function () {
     console.log('Disconnected');
 });
 
-socket.on ('gotYourMessage',function (data) {
+socket.on ('createMessage',function (data) {
     console.log(data);
 });
