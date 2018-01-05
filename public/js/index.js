@@ -20,16 +20,11 @@
 
  var socket = io();
 socket.on('connect',function(){
-
     console.log('Connected to server');
-    socket.emit('createMessage','hello');
-
 });
 socket.on('disconnect',function () {
     console.log('Disconnected');
 });
-socket.emit('createMessage','Hello from create email');
-
 
 socket.on ('gotYourMessage',function (data) {
     console.log(data);

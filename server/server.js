@@ -17,22 +17,12 @@ io.on('connection',(socket)=>{
 
         console.log('User disconnected ');
     });
-    socket.on('newEmail',()=>{
-        console.log('New Email');
-    });
-
-    socket.emit('newEmail',{
-            from:'y@1.com',
-            text:'Hello'
-        }
-    );
-
-    socket.on('createEmail',(data)=>{
-        console.log(data);
-    });
-
-    socket.on('createMessage',(msg)=>{
-        socket.emit('gotYourMessage','GOt it ');
+       io.emit('createMessage',(msg)=>{
+        socket.emit('gotYourMessage',{
+            f:'Yousof',
+            text:'Hello and how are you?',
+            date : 123345
+        });
         console.log(msg);
     });
 });
