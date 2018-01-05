@@ -26,6 +26,7 @@ io.on('connection',(socket)=>{
             text:'Hello'
         }
     );
+
     socket.on('createEmail',(data)=>{
         console.log(data);
     });
