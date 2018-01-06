@@ -3,6 +3,8 @@ const express = require('express');
 const socketIo =require('socket.io');
 const http = require('http');
 
+const {generateMessage} = require('./utils/message');
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
@@ -12,16 +14,17 @@ const publicPath =path.join(__dirname,'../public');
 app.use(express.static(publicPath));
 var io = socketIo(server);
 io.on('connection',(socket)=>{
-    console.log('User connected on socket');
     socket.on('disconnect',()=>{
 
         console.log('User disconnected ');
     });
-       io.emit('createMessage',{
-                   f:'Yousof',
-            text:'Hello and how are you?',
-            date : 123345
-        });
+    socket.emit('newMessage',generateMessage('Admin','Welcome here!'));
+    socket.broadcast.emit('newMessage',generateMessage('Admin','New User Joined.'));
+    socket.on('createMessage',(message)=>{
+        console.log(message);
+        io.emit('newMessage',generateMessage(message.from,message.text));
+    });
+
 });
 
 
