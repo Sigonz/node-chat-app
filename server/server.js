@@ -15,14 +15,14 @@ app.use(express.static(publicPath));
 var io = socketIo(server);
 io.on('connection',(socket)=>{
     socket.on('disconnect',()=>{
-
         console.log('User disconnected ');
     });
     socket.emit('newMessage',generateMessage('Admin','Welcome here!'));
     socket.broadcast.emit('newMessage',generateMessage('Admin','New User Joined.'));
-    socket.on('createMessage',(message)=>{
+    socket.on('createMessage',(message,callback)=>{
         console.log(message);
         io.emit('newMessage',generateMessage(message.from,message.text));
+        callback('This is from Server');
     });
 
 });
