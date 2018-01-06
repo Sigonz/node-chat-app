@@ -12,13 +12,6 @@ socket.on ('newMessage',function (data) {
     li.text(`${data.from}:${data.text}`);
     jQuery('#messages').append(li);
 });
-socket.emit('createMessage',{
-    from:'User1',
-    text:'I m doing good!'
-},function (ack) {
-    console.log('Got it' + ack);
-});
-
 jQuery('#chat-message').on('submit', function(e){
     e.preventDefault();
     socket.emit('createMessage',{
