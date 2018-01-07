@@ -18,7 +18,21 @@ jQuery('#chat-message').on('submit', function(e){
             from:'JQuery',
             text:jQuery('[name=message]').val()
     },function(ack){
-
         }
     );
+});
+var locationButton = jQuery('#location');
+
+locationButton.on('click',function (e) {
+            if (!navigator.geolocation)
+                alert('Not supported in this browser');
+
+            navigator.geolocation.getCurrentPosition(function (position){
+                    socket.emit('newLocationMessage',{
+                            latitude:position.coords.latitude,
+                            longitude:position.coords.longitude
+                    });
+            },function (err) {
+                alert('Not provided');
+            } );
 });

@@ -24,7 +24,10 @@ io.on('connection',(socket)=>{
         io.emit('newMessage',generateMessage(message.from,message.text));
         callback('This is from Server');
     });
-
+    socket.on('newLocationMessage',function (data) {
+        io.emit('newMessage',
+            generateMessage('admin',`${data.latitude},${data.longitude}`))
+    });
 });
 
 
